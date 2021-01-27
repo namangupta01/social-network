@@ -5,6 +5,7 @@ module Api
       before_action :check_and_set_post
 
       api :POST, '/likes', "Toggle like to a post"
+      error code: 422, desc: 'Invalid params'
       param :post_id, Integer, desc: "Post Id", required: true, missing_message: "Post Id is required"
       def toggle_like
         liked = Like.toggle_like @post.id, @current_user.id

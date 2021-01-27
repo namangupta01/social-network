@@ -2,6 +2,10 @@ class ApiController < ActionController::API
 
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
+  rescue_from Apipie::ParamError do |e|
+    render json: {error: e.message, status: 422}, status: 422
+  end
+
   private
   def response_data(data, message, status, error:nil, options: {})
     result = {}
